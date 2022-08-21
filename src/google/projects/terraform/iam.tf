@@ -1,6 +1,5 @@
 resource "google_service_account" "terraform" {
   account_id   = "terraform"
-  display_name = "terraform"
 }
 
 resource "google_iam_workload_identity_pool" "github" {
