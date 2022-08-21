@@ -3,6 +3,7 @@ on:
   - push
 jobs:
   terraform-plan:
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: src/google/projects/terraform
