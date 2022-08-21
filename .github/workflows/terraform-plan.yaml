@@ -16,8 +16,6 @@ jobs:
         with:
           workload_identity_provider: 'projects/304731433117/locations/global/workloadIdentityPools/github-pool/providers/github'
           service_account: 'terraform@terraform-360104.iam.gserviceaccount.com'
-          token_format: 'access_token'
-      - run: cat "$GOOGLE_APPLICATION_CREDENTIALS"
       - uses: hashicorp/setup-terraform@v2
       - run: terraform init
       - run: terraform plan -no-color
