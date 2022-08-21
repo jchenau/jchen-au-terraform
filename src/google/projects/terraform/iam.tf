@@ -1,5 +1,5 @@
 resource "google_service_account" "terraform" {
-  account_id = "terraform"
+  account_id   = "terraform"
   display_name = "terraform"
 }
 
@@ -28,6 +28,14 @@ data "google_iam_policy" "terraform" {
 
     members = [
       "principalSet://iam.googleapis.com/projects/${google_project.terraform.number}/locations/global/workloadIdentityPools/${google_iam_workload_identity_pool.github.workload_identity_pool_id}/attribute.repository/jchenship/jchen-au-terraform",
+    ]
+  }
+
+  binding {
+    role = "roles/iam.serviceAccountTokenCreator"
+
+    members = [
+      "user:junrui.chen@jchen.au",
     ]
   }
 }
