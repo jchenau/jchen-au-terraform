@@ -9,7 +9,9 @@ jobs:
       - id: changed-files
         uses: tj-actions/changed-files@v27
         with:
-          path: src
+          files: |
+            src/**/*.tf
+            src/**/*.tfvars
           dir_names: true
           json: true
       - run: echo ${{ steps.changed-files.outputs.all_changes_files }}

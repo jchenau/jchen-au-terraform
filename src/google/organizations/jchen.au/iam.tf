@@ -1,4 +1,3 @@
-# test
 resource "google_organization_iam_policy" "organization" {
   org_id      = var.org_id
   policy_data = data.google_iam_policy.organization.policy_data
