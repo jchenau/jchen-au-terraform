@@ -25,7 +25,7 @@ data "google_iam_policy" "terraform" {
     role = "roles/iam.workloadIdentityUser"
 
     members = [
-      "principalSet://iam.googleapis.com/projects/${google_project.terraform.number}/locations/global/workloadIdentityPools/${google_iam_workload_identity_pool.terraform.workload_identity_pool_id}/attribute.repository/jchenship/jchen-au-terraform",
+      "principalSet://iam.googleapis.com/projects/${google_project.main.number}/locations/global/workloadIdentityPools/${google_iam_workload_identity_pool.terraform.workload_identity_pool_id}/attribute.repository/jchenship/jchen-au-terraform",
     ]
   }
 }
