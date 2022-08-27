@@ -15,9 +15,7 @@ data "azuread_user" "this" {
 resource "azuread_group" "this" {
   for_each = local.groups
 
-  display_name = each.key
-  #   owners           = [data.azuread_client_config.current.object_id]
+  display_name     = each.key
   security_enabled = true
-
-  members = each.value
+  members          = each.value
 }
