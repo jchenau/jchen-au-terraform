@@ -16,3 +16,7 @@ variable "zone" {
   type    = string
   default = "australia-southeast1-c"
 }
+
+variable "enabled_apis" {
+  type = list(string)
+}

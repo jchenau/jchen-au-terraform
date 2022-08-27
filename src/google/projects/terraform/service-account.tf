@@ -2,13 +2,12 @@ resource "google_service_account" "terraform" {
   account_id   = "terraform"
 }
 
-resource "google_iam_workload_identity_pool" "github" {
-  workload_identity_pool_id = "github-pool"
-  display_name              = "Github Pool"
+resource "google_iam_workload_identity_pool" "terraform" {
+  workload_identity_pool_id = "terraform"
 }
 
 resource "google_iam_workload_identity_pool_provider" "github" {
-  workload_identity_pool_id          = google_iam_workload_identity_pool.github.workload_identity_pool_id
+  workload_identity_pool_id          = google_iam_workload_identity_pool.terraform.workload_identity_pool_id
   workload_identity_pool_provider_id = "github"
   attribute_mapping = {
     "google.subject"       = "assertion.sub"
@@ -26,15 +25,7 @@ data "google_iam_policy" "terraform" {
     role = "roles/iam.workloadIdentityUser"
 
     members = [
-      "principalSet://iam.googleapis.com/projects/${google_project.terraform.number}/locations/global/workloadIdentityPools/${google_iam_workload_identity_pool.github.workload_identity_pool_id}/attribute.repository/jchenship/jchen-au-terraform",
-    ]
-  }
-
-  binding {
-    role = "roles/iam.serviceAccountTokenCreator"
-
-    members = [
-      "user:junrui.chen@jchen.au",
+      "principalSet://iam.googleapis.com/projects/${google_project.terraform.number}/locations/global/workloadIdentityPools/${google_iam_workload_identity_pool.terraform.workload_identity_pool_id}/attribute.repository/jchenship/jchen-au-terraform",
     ]
   }
 }

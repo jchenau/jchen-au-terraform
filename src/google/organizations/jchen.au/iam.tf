@@ -17,7 +17,16 @@ data "google_iam_policy" "organization" {
 
     members = [
       "group:gcp-organization-admin@groups.jchen.au",
-      "serviceAccount:terraform@terraform-360104.iam.gserviceaccount.com",
+      "serviceAccount:terraform@terraform-5312.iam.gserviceaccount.com",
+    ]
+  }
+
+  binding {
+    role = "roles/resourcemanager.folderCreator"
+
+    members = [
+      "group:gcp-organization-admin@groups.jchen.au",
+      "serviceAccount:terraform@terraform-5312.iam.gserviceaccount.com",
     ]
   }
 
@@ -34,7 +43,7 @@ data "google_iam_policy" "organization" {
 
     members = [
       "group:gcp-organization-admin@groups.jchen.au",
-      "serviceAccount:terraform@terraform-360104.iam.gserviceaccount.com",
+      "serviceAccount:terraform@terraform-5312.iam.gserviceaccount.com",
     ]
   }
 
@@ -43,7 +52,16 @@ data "google_iam_policy" "organization" {
 
     members = [
       "group:gcp-organization-admin@groups.jchen.au",
-      "serviceAccount:terraform@terraform-360104.iam.gserviceaccount.com",
+      "serviceAccount:terraform@terraform-5312.iam.gserviceaccount.com",
+    ]
+  }
+
+  binding {
+    role = "roles/resourcemanager.projectCreator"
+
+    members = [
+      "group:gcp-organization-admin@groups.jchen.au",
+      "serviceAccount:terraform@terraform-5312.iam.gserviceaccount.com",
     ]
   }
 

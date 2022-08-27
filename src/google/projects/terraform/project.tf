@@ -1,20 +1,19 @@
+data "google_billing_account" "main" {
+  display_name = "My Billing Account"
+  open         = true
+}
+
 resource "google_project" "terraform" {
   name       = "terraform"
   project_id = var.project_id
   org_id     = var.org_id
+
+  billing_account = data.google_billing_account.main.id
 }
 
-resource "google_project_service" "cloudresourcemanager" {
-  project = var.project_id
-  service = "cloudresourcemanager.googleapis.com"
-}
+resource "google_project_service" "this" {
+  for_each = toset(var.enabled_apis)
 
-resource "google_project_service" "storage" {
   project = var.project_id
-  service = "storage.googleapis.com"
-}
-
-resource "google_project_service" "iam" {
-  project = var.project_id
-  service = "iam.googleapis.com"
+  service = each.key
 }
