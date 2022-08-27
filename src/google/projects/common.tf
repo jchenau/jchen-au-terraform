@@ -21,8 +21,14 @@ variable "zone" {
   default = "australia-southeast1-c"
 }
 
-variable "enabled_apis" {
-  type = list(string)
+variable "enable_apis" {
+  type    = list(string)
+  default = []
+}
+
+variable "enable_shared_vpc" {
+  type    = bool
+  default = false
 }
 
 provider "google" {
@@ -44,10 +50,21 @@ resource "google_project" "main" {
 }
 
 resource "google_project_service" "this" {
-  for_each = toset(var.enabled_apis)
+  for_each = toset(var.enable_apis)
 
   project = var.project_id
   service = each.key
+
+  depends_on = [
+    google_project.main,
+  ]
+}
+
+resource "google_compute_shared_vpc_service_project" "this" {
+  count = var.enable_shared_vpc ? 1 : 0
+
+  host_project    = "network-1050"
+  service_project = var.project_id
 
   depends_on = [
     google_project.main,
