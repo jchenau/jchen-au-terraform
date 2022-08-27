@@ -25,13 +25,6 @@ variable "enabled_apis" {
   type = list(string)
 }
 
-terraform {
-  backend "gcs" {
-    bucket = "jchen-au-terraform-state"
-    prefix = "google/projects/terraform"
-  }
-}
-
 provider "google" {
   project = var.project_id
   region  = var.region
@@ -55,4 +48,8 @@ resource "google_project_service" "this" {
 
   project = var.project_id
   service = each.key
+
+  depends_on = [
+    google_project.main,
+  ]
 }
