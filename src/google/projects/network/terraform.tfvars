@@ -3,5 +3,6 @@ project_name = "network"
 enable_apis = [
   "compute.googleapis.com",
   "container.googleapis.com",
+  "dns.googleapis.com",
   "iam.googleapis.com",
 ]

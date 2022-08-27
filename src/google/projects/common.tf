@@ -31,6 +31,16 @@ variable "enable_shared_vpc" {
   default = false
 }
 
+variable "network_project_id" {
+  type    = string
+  default = "network-1050"
+}
+
+variable "network_dns_name" {
+  type    = string
+  default = "jchen.au."
+}
+
 provider "google" {
   project = var.project_id
   region  = var.region
@@ -63,7 +73,7 @@ resource "google_project_service" "this" {
 resource "google_compute_shared_vpc_service_project" "this" {
   count = var.enable_shared_vpc ? 1 : 0
 
-  host_project    = "network-1050"
+  host_project    = var.network_project_id
   service_project = var.project_id
 
   depends_on = [

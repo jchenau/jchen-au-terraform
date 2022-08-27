@@ -1,5 +1,5 @@
 data "google_compute_subnetwork" "kubernetes_node" {
-  project = "network-1050"
+  project = var.network_project_id
   name    = "kubernetes-node"
   region  = var.region
 }
