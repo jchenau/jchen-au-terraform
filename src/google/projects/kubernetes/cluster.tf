@@ -7,8 +7,15 @@ data "google_compute_subnetwork" "kubernetes_node" {
 resource "google_container_cluster" "main" {
   name     = "jchen-au-gke-main"
   location = var.region
+  node_locations = [
+    var.zone,
+  ]
 
-  enable_autopilot = true
+  # We can't create a cluster with no node pool defined, but we want to only use
+  # separately managed node pools. So we create the smallest possible default
+  # node pool and immediately delete it.
+  remove_default_node_pool = true
+  initial_node_count       = 1
 
   network    = data.google_compute_subnetwork.kubernetes_node.network
   subnetwork = data.google_compute_subnetwork.kubernetes_node.self_link
@@ -20,5 +27,22 @@ resource "google_container_cluster" "main" {
 
   authenticator_groups_config {
     security_group = "gke-security-groups@groups.jchen.au"
+  }
+}
+
+resource "google_container_node_pool" "primary" {
+  name       = "primary"
+  cluster    = google_container_cluster.main.id
+  node_count = 1
+
+  node_config {
+    machine_type = "e2-medium"
+    preemptible  = true
+    disk_size_gb = 10
+
+    service_account = google_service_account.kubernetes_node.email
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
   }
 }
