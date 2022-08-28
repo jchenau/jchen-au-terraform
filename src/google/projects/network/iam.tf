@@ -41,6 +41,14 @@ data "google_iam_policy" "project" {
   }
 
   binding {
+    role = "roles/dns.admin"
+    members = [
+      "serviceAccount:cert-manager@kubernetes-8241.iam.gserviceaccount.com",
+      "serviceAccount:external-dns@kubernetes-8241.iam.gserviceaccount.com",
+    ]
+  }
+
+  binding {
     role = "roles/editor"
     members = [
       "serviceAccount:247725844110-compute@developer.gserviceaccount.com",
