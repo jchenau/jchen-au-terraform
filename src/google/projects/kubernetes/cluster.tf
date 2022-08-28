@@ -38,7 +38,7 @@ resource "google_container_node_pool" "primary" {
   node_config {
     machine_type = "e2-medium"
     preemptible  = true
-    disk_size_gb = 10
+    disk_size_gb = 20
 
     service_account = google_service_account.kubernetes_node.email
     oauth_scopes = [

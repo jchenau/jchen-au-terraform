@@ -11,4 +11,7 @@ groups = {
   gke-security-groups = [
     "group:gke-cluster-admin",
   ]
+  argocd-admin = [
+    "user:junrui.chen@jchen.au",
+  ]
 }
