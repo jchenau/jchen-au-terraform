@@ -32,6 +32,18 @@ resource "google_container_cluster" "main" {
   workload_identity_config {
     workload_pool = "${var.project_id}.svc.id.goog"
   }
+
+  // disable default logging to reduce resource request
+  // should not do this in production
+  logging_config {
+    enable_components = []
+  }
+
+  // disable default monitoring to reduce resource request
+  // should not do this in production
+  monitoring_config {
+    enable_components = []
+  }
 }
 
 resource "google_container_node_pool" "primary" {
