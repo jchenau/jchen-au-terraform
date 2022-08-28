@@ -41,6 +41,11 @@ variable "network_dns_name" {
   default = "jchen.au."
 }
 
+variable "network_dns_zone_name" {
+  type    = string
+  default = "jchen-au"
+}
+
 provider "google" {
   project = var.project_id
   region  = var.region
