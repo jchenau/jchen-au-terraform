@@ -28,6 +28,10 @@ resource "google_container_cluster" "main" {
   authenticator_groups_config {
     security_group = "gke-security-groups@groups.jchen.au"
   }
+
+  workload_identity_config {
+    workload_pool = "${var.project_id}.svc.id.goog"
+  }
 }
 
 resource "google_container_node_pool" "primary" {
